@@ -1,6 +1,6 @@
 package implicittest
 
-object typeClassTest {
+object TypeClassTest {
   trait NumberLike[T] {
     def plus(x: T, y: T): T
     def divide(x: T, y: Int): T
@@ -15,5 +15,8 @@ object typeClassTest {
     def plus(x: Int, y: Int): Int = x + y
     def divide(x: Int, y: Int): Int = x / y
     def minus(x: Int, y: Int): Int = x - y
+  }
+  def mean[T](numbers: Seq[T])(implicit number: NumberLike[T]): T = {
+    number.divide(numbers.reduce(number.plus), numbers.size)
   }
 }
